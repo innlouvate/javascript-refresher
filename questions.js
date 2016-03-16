@@ -98,7 +98,15 @@ var calculateAverage = function(array) {
 }
 
 var getElementsUntilGreaterThanFive = function(array) {
-  return array.slice(0,6);
+  result = [];
+  for (var i=0; i < array.length; i++) {
+    if (array[i] > 5) {
+      break;
+    } else {
+      result.push(array[i]);
+    }
+  }
+  return result;
 }
 
 var convertArrayToObject = function(array) {
@@ -153,8 +161,15 @@ var getDomainName = function(string) {
 }
 
 var titleize = function(string) {
-  return 'Write your method here';
-}
+  var words = string.split(' ');
+  return words.map(function(word, index) {
+    if(word.length > 3 || index === 0 || words[index-1].endsWith('.')) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    } else {
+      return word;
+    }
+  }).join(' ');
+} // possibly should also filter out certain 4 letter words?
 
 var checkForSpecialCharacters = function(string) {
   return string != string.replace(/[!@£$%^&*(){}:;<>?]/g,'');
@@ -177,13 +192,24 @@ var easySquareRoot = function(number) {
 
 var factorial = function(number) {
   var sum = 1;
-  for(var i=5; i>0; i--) { sum = sum * i }
+  for(var i=number; i>0; i--) { sum = sum * i }
   return sum;
 }
 
-var findAnagrams = function(string) {
-  return 'Write your method here';
-}
+function findAnagrams(start, string) {
+  if ( string.length == 1 ) {
+    return [ start + string ];
+  } else {
+    var returnResult = [];
+    for (var i=0; i < string.length; i++) {
+      var result = findAnagrams(string[i], string.substr(0, i) + string.substr(i+1));
+      for (var j=0; j<result.length; j++) {
+        returnResult.push(start + result[j]);
+      }
+    }
+    return returnResult;
+  }
+} // solution worked from stackoverflow, to rewrite
 
 var convertToCelsius = function(number) {
   return Math.round((number - 32) / 1.8);

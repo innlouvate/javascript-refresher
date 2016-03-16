@@ -179,12 +179,12 @@ describe('javascriptRefresher', function(){
   });
 
   it('finds all possible anagrams of a word', function(){
-    var result = findAnagrams('mad');
+    var result = findAnagrams('','mad');
     var expectedAnagrams = ["adm", "amd", "dam", "dma", "mad", "mda"];
     for (var anagram of expectedAnagrams) {
       expect(result).toContain(anagram);
     }
-    var result2 = findAnagrams('ma');
+    var result2 = findAnagrams('','ma');
     var expectedAnagrams2 = ["am", "ma"];
     for (var anagram of expectedAnagrams2) {
       expect(result2).toContain(anagram);
